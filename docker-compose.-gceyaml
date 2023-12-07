@@ -14,21 +14,21 @@ services:
   db:
     image: postgres:15.4
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data-[061]:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=iniad
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=testdb
   nginx:
     image: nginx:latest
-    container_name: nginx
+    container_name: mynginx-[061]
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
-      - ./my-project/nginx:/etc/nginx/conf.d
-      - ./my-project/src/collected_static:/static
+      - ./nginx:/etc/nginx/conf.d
+      - ./src/collected_static:/static
     depends_on:
       - django
 
 volumes:
-  postgres-data:
+  postgres-data-[061]:
